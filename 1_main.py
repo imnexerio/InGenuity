@@ -1,10 +1,10 @@
 import cv2
 import sys
 
-config_file=r'SR-DTU\ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
-frozen_model=r'SR-DTU\frozen_inference_graph.pb'
-weights_path=r"InGenuity\yolov4.weights"
-cfg_path=r"InGenuity\yolov4.cfg"
+config_file=r'ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
+frozen_model=r'frozen_inference_graph.pb'
+weights_path=r"yolov4.weights"
+cfg_path=r"yolov4.cfg"
 #model = cv2.dnn_DetectionModel(weights_path,cfg_path)
 model = cv2.dnn_DetectionModel(frozen_model,config_file)
 
@@ -24,7 +24,7 @@ model.setInputSwapRB(True)
 font_scale = 3
 font = cv2.FONT_HERSHEY_PLAIN
 
-cap=cv2.VideoCapture(r'InGenuity\Surveillance Video.mp4')
+cap=cv2.VideoCapture(r'Surveillance Video.mp4')
 #cap=cv2.VideoCapture(0)
 def main():
     while True:
@@ -38,7 +38,7 @@ def main():
         if (len(classIndex)!=0):
             for ClassInd, conf, boxes in zip(classIndex.flatten(),confidece.flatten(), bbox):
                 if (ClassInd<=90):
-                    print((classIndex[0]))
+                    #print((classIndex[0]))
                     #print(classLabels(list[ClassInd[0]]))
                     cv2.rectangle(frame,boxes,(255,0,0),2)
                     #cv2.putText(frame,classLabels[ClassInd-1]+str(confidece*100),(boxes[0]+10,boxes[1]+30),cv2.FONT_HERSHEY_COMPLEX,1,(0,255,0),2)
